@@ -25,9 +25,12 @@ import java.util.Map;
 import java.util.TimeZone;
 
 public class Config {
-    // General configuration
-    public static final String APP_ID_AT_GOOGLE_DEVELOPER_CONSOLE = "DevFest-Omsk-App";
-    public static final String APP_API_KEY_AT_GOOGLE_API_CONSOLE = "AIzaSyBK00d8tsQZnHGshfTg4MRNTbKvkZkb2Mo";
+
+    // App Id (aka Name) at Google Cloud Console (aka Google API Console)
+    public static final String APP_ID_NAME_AT_GOOGLE_CLOUD_CONSOLE = "306219399262";
+
+    // App API Key at Google Cloud Console (aka Google API Console)
+    public static final String APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE = "AIzaSyBK00d8tsQZnHGshfTg4MRNTbKvkZkb2Mo";
 
     // Switch to enable "Experts" section in menu
     public static final boolean ENABLE_EXPERTS_SECTION = false;
@@ -82,14 +85,14 @@ public class Config {
     public static final long DAY_MILLIS = 24 * HOUR_MILLIS;
 
     // OAuth 2.0 related config
-    public static final String APP_NAME = APP_ID_AT_GOOGLE_DEVELOPER_CONSOLE;
-    public static final String API_KEY = APP_API_KEY_AT_GOOGLE_API_CONSOLE;
+    public static final String APP_NAME = APP_ID_NAME_AT_GOOGLE_CLOUD_CONSOLE;
+    public static final String API_KEY = APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE;
 
     // Announcements
     public static final String ANNOUNCEMENTS_PLUS_ID = "102520175692033125056"; // id of +GDG Omsk page
 
     // YouTube API config
-    public static final String YOUTUBE_API_KEY = APP_API_KEY_AT_GOOGLE_API_CONSOLE;
+    public static final String YOUTUBE_API_KEY = APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE;
 
     // YouTube share URL
     public static final String YOUTUBE_SHARE_URL_PREFIX = "http://youtu.be/";
@@ -102,15 +105,15 @@ public class Config {
     public static final String WIFI_PASSPHRASE = "letsdothis";
 
     // GCM config
-    public static final String GCM_SERVER_PROD_URL = "http://gcm.gdg-devfest-omsk.org";
-    public static final String GCM_SERVER_URL = "http://gcm.gdg-devfest-omsk.org";
+    public static final String GCM_SERVER_PROD_URL = "https://devfest-omsk-gcm.appspot.com";
+    public static final String GCM_SERVER_URL = "https://devfest-omsk-gcm.appspot.com";
 
     // the GCM sender ID is the ID of the app in Google Cloud Console
-    public static final String GCM_SENDER_ID = APP_ID_AT_GOOGLE_DEVELOPER_CONSOLE;
+    public static final String GCM_SENDER_ID = APP_ID_NAME_AT_GOOGLE_CLOUD_CONSOLE;
 
     // The registration api KEY in the gcm server (configured in the GCM
     // server's AuthHelper.java file)
-    public static final String GCM_API_KEY = "";
+    public static final String GCM_API_KEY = "REG-KEY-ANDROID-APP";
 
     // When do we start to offer to set up the user's wifi?
     public static final long WIFI_SETUP_OFFER_START =
