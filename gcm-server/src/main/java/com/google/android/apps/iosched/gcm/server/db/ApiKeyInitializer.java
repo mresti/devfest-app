@@ -35,7 +35,7 @@ import com.google.appengine.api.datastore.DatastoreService;
  */
 public class ApiKeyInitializer implements ServletContextListener {
 
-    public static final String API_KEY = "<ENTER_YOUR_KEY>";
+    public static final String API_KEY = "top-secret";
 
     public static final String ATTRIBUTE_ACCESS_KEY = "apiKey";
 

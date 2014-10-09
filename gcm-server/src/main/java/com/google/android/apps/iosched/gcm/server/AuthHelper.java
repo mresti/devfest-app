@@ -21,13 +21,12 @@ public class AuthHelper {
 
   /** Keys that can be used to request GCM registration */
   private static final String[][] REGISTRATION_KEYS = {
-    //{"REG-your-key-here", "Android app registration key"},
+    {"REG-KEY-ANDROID-APP", "Android app registration key"},
   };
 
   /** Keys that can be used to request full admin privileges. */
   private static final String[][] ADMIN_KEYS = {
-    // {"ADM-your-key-here", "Command line tool admin key"},
-    // {"ADM-your-key-here2", "Updater AppEngine app"}
+    {"top-secret", "Command line tool admin key"}
   };
 
   /**
