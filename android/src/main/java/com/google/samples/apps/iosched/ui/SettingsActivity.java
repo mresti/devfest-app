@@ -16,13 +16,12 @@
 
 package com.google.samples.apps.iosched.ui;
 
-import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 
+import com.google.samples.apps.iosched.Config;
 import com.google.samples.apps.iosched.R;
 import com.google.samples.apps.iosched.service.SessionCalendarService;
 import com.google.samples.apps.iosched.util.PrefUtils;
@@ -53,7 +52,7 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
     private void setupSimplePreferencesScreen() {
         // Add 'general' preferences.
         addPreferencesFromResource(R.xml.preferences);
-        if (PrefUtils.hasEnabledBle(this)) {
+        if (Config.ENABLE_NEARBY_FEATURE && PrefUtils.hasEnabledBle(this)) {
             addPreferencesFromResource(R.xml.ble_preferences);
         }
     }

@@ -36,6 +36,8 @@ public class Config {
     public static final boolean ENABLE_EXPERTS_SECTION = false;
     // Switch to enable "People I have met" section in menu
     public static final boolean ENABLE_PEOPLE_I_HAVE_MET_SECTION = false;
+    // Switch to enable Nearby feature
+    public static final boolean ENABLE_NEARBY_FEATURE = false;
 
     // Is this an internal dogfood build?
     public static final boolean IS_DOGFOOD_BUILD = false;
