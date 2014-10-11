@@ -1,5 +1,5 @@
-GDG DevFest Omsk Android App
-======================
+GDG DevFest Android Granada Android App
+=======================================
 
 Hello World!
 
@@ -9,6 +9,10 @@ Objective of this project is customization of [I/O App](http://android-developer
 
 Current progress
 ---
+
+GDG Granada team was started working to custom this app.
+
+
 Work was started by [Alex Korovyansky](http://github.com/korovyansk) at August 2, 2014. 
 
 Basic modification is [already](https://github.com/GDGOmsk/devfest-app/commit/52066ba5ef8fa013dd0661fda9681fd332f83002) [done](https://github.com/GDGOmsk/devfest-app/releases). Also here in GDG Omsk several Android devs have expressed interest in contribution to the project. So we have nice roadmap for [August](https://github.com/GDGOmsk/devfest-app/issues?q=is%3Aopen+is%3Aissue+milestone%3AAugust+sort%3Acreated-asc)!
