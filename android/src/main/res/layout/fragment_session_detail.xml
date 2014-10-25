@@ -68,20 +68,6 @@
                 android:visibility="gone"
                 />
 
-            <com.google.samples.apps.iosched.ui.widget.MessageCardView
-                android:id="@+id/give_feedback_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                iosched:messageText="@string/session_give_feedback_message"
-                iosched:button1text="@string/no_thanks"
-                iosched:button2text="@string/give_feedback"
-                iosched:button2tag="GIVE_FEEDBACK"
-                iosched:button2emphasis="true"
-                android:layout_marginLeft="@dimen/keyline_2_session_detail"
-                android:layout_marginBottom="16dp"
-                android:visibility="gone"
-                />
-
             <TextView android:id="@+id/time_hint"
                 android:visibility="gone"
                 android:layout_width="match_parent"

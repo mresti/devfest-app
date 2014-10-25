@@ -40,7 +40,6 @@ import com.google.samples.apps.iosched.provider.ScheduleContract;
 import com.google.samples.apps.iosched.ui.BrowseSessionsActivity;
 import com.google.samples.apps.iosched.ui.MapFragment;
 import com.google.samples.apps.iosched.ui.MyScheduleActivity;
-import com.google.samples.apps.iosched.ui.SessionFeedbackActivity;
 import com.google.samples.apps.iosched.ui.phone.MapActivity;
 import com.google.samples.apps.iosched.util.FeedbackUtils;
 import com.google.samples.apps.iosched.util.PrefUtils;
