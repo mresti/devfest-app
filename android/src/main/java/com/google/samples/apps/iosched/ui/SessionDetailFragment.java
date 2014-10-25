@@ -104,7 +104,6 @@ public class SessionDetailFragment extends Fragment implements
     private boolean mInitStarred;
     private boolean mDismissedWatchLivestreamCard = false;
     private boolean mHasLivestream = false;
-    private MenuItem mSocialStreamMenuItem;
     private MenuItem mShareMenuItem;
 
     private ViewGroup mRootView;
@@ -587,9 +586,6 @@ public class SessionDetailFragment extends Fragment implements
         }
 
         mHashTag = cursor.getString(SessionsQuery.HASHTAG);
-        if (!TextUtils.isEmpty(mHashTag)) {
-            enableSocialStreamMenuItemDeferred();
-        }
 
         mRoomId = cursor.getString(SessionsQuery.ROOM_ID);
 
@@ -877,16 +873,6 @@ public class SessionDetailFragment extends Fragment implements
         });
     }
 
-    private void enableSocialStreamMenuItemDeferred() {
-        mDeferredUiOperations.add(new Runnable() {
-            @Override
-            public void run() {
-                mSocialStreamMenuItem.setVisible(true);
-            }
-        });
-        tryExecuteDeferredUiOperations();
-    }
-
     private void showStarredDeferred(final boolean starred, final boolean allowAnimate) {
         mDeferredUiOperations.add(new Runnable() {
             @Override
@@ -922,12 +908,7 @@ public class SessionDetailFragment extends Fragment implements
     }
 
     private void tryExecuteDeferredUiOperations() {
-        if (mSocialStreamMenuItem != null) {
-            for (Runnable r : mDeferredUiOperations) {
-                r.run();
-            }
-            mDeferredUiOperations.clear();
-        }
+
     }
 
     private void onSpeakersQueryComplete(Cursor cursor) {
@@ -1012,7 +993,6 @@ public class SessionDetailFragment extends Fragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.session_detail, menu);
-        mSocialStreamMenuItem = menu.findItem(R.id.menu_social_stream);
         mShareMenuItem = menu.findItem(R.id.menu_share);
         tryExecuteDeferredUiOperations();
     }
