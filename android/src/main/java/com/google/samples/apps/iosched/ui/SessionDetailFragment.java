@@ -443,23 +443,6 @@ public class SessionDetailFragment extends Fragment implements
         } else {
             LOGD(TAG, "Not scheduling notification about session start, too late.");
         }
-
-        // Schedule feedback notification
-        if (UIUtils.getCurrentTime(context) < mSessionEnd) {
-            LOGD(TAG, "Scheduling notification about session feedback.");
-            scheduleIntent = new Intent(
-                    SessionAlarmService.ACTION_SCHEDULE_FEEDBACK_NOTIFICATION,
-                    null, context, SessionAlarmService.class);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_ID, mSessionId);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_START, mSessionStart);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_END, mSessionEnd);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_TITLE, mTitleString);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_ROOM, mRoomName);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_SPEAKERS, mSpeakers);
-            context.startService(scheduleIntent);
-        } else {
-            LOGD(TAG, "Not scheduling feedback notification, too late.");
-        }
     }
 
     private void updateTimeBasedUi() {
