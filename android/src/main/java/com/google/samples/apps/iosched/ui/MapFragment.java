@@ -71,7 +71,7 @@ public class MapFragment extends com.google.android.gms.maps.MapFragment impleme
         GoogleMap.OnIndoorStateChangeListener, LoaderCallbacks<Cursor>,
         GoogleMap.OnMapLoadedCallback {
 
-    private static final LatLng LAT_LNG_EVENT = new LatLng(37.1969755, -3.624258);
+    private static final LatLng LAT_LNG_EVENT = new LatLng(55.028372, 73.261915);
     private static final LatLng LAT_LNG_EVENT_CAMERA =  LAT_LNG_EVENT;
 
     // Initial camera zoom

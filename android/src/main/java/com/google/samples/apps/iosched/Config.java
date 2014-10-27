@@ -47,7 +47,7 @@ public class Config {
     public static final String DOGFOOD_BUILD_WARNING_TEXT = "This is a test build.";
 
     // Public data manifest URL
-    public static final String PROD_CONFERENCE_DATA_MANIFEST_URL = "https://00e4a9513962da55d2a75d9c6ac2555247d0243b.googledrive.com/host/0B6yrWd0Ff8tbdHJZVHFuTEZxOTg/appDevfest/manifest.json";
+    public static final String PROD_CONFERENCE_DATA_MANIFEST_URL = "https://dl.dropboxusercontent.com/u/4423440/devfest-app/manifest.json";
 
     // Manifest URL override for Debug (staging) builds:
     public static final String MANIFEST_URL = PROD_CONFERENCE_DATA_MANIFEST_URL;
@@ -55,12 +55,12 @@ public class Config {
     public static final String BOOTSTRAP_DATA_TIMESTAMP = "Thu, 10 Apr 2014 00:01:03 GMT";
 
     // Conference hashtag
-    public static final String CONFERENCE_HASHTAG = "#devfestGRX";
+    public static final String CONFERENCE_HASHTAG = "#devfest";
 
     // Patterns that, when absent from a hashtag, will trigger the addition of the
     // CONFERENCE_HASHTAG on sharing snippets. Ex: "#Android" will be shared as "#io14 #Android",
     // but "#iohunt" won't be modified.
-    public static final String CONFERENCE_HASHTAG_PREFIX = "#devfestGRX";
+    public static final String CONFERENCE_HASHTAG_PREFIX = "#devfest";
 
     // Hard-coded conference dates. This is hardcoded here instead of extracted from the conference
     // data to avoid the Schedule UI breaking if some session is incorrectly set to a wrong date.
@@ -68,11 +68,14 @@ public class Config {
 
     public static final long[][] CONFERENCE_DAYS = new long[][] {
             // start and end of day 1
-            { ParserUtils.parseTime("2014-10-31T10:00:00.000+01:00"),
-              ParserUtils.parseTime("2014-10-31T14:14:59.999+01:00") },
+            { ParserUtils.parseTime("2014-11-01T10:00:00.000+07:00"),
+              ParserUtils.parseTime("2014-11-01T17:59:59.999+07:00") },
+            // start and end of day 2
+            { ParserUtils.parseTime("2014-11-02T10:00:00.000+07:00"),
+              ParserUtils.parseTime("2014-11-02T15:59:59.999+07:00") },
         };
 
-    public static final TimeZone CONFERENCE_TIMEZONE = TimeZone.getTimeZone("Europe/Madrid");
+    public static final TimeZone CONFERENCE_TIMEZONE = TimeZone.getTimeZone("Asia/Omsk");
 
     public static final long CONFERENCE_START_MILLIS = CONFERENCE_DAYS[0][0];
     public static final long CONFERENCE_END_MILLIS = CONFERENCE_DAYS[CONFERENCE_DAYS.length-1][1];
@@ -88,7 +91,7 @@ public class Config {
     public static final String API_KEY = APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE;
 
     // Announcements
-    public static final String ANNOUNCEMENTS_PLUS_ID = "107621838547829286968"; // id of +GDG Granada page
+    public static final String ANNOUNCEMENTS_PLUS_ID = "102520175692033125056"; // id of +GDG Omsk page
 
     // YouTube API config
     public static final String YOUTUBE_API_KEY = APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE;
