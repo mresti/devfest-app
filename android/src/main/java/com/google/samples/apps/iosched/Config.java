@@ -27,10 +27,10 @@ import java.util.TimeZone;
 public class Config {
 
     // App Id (aka Name) at Google Cloud Console (aka Google API Console)
-    public static final String APP_ID_NAME_AT_GOOGLE_CLOUD_CONSOLE = "306219399262";
+    public static final String APP_ID_NAME_AT_GOOGLE_CLOUD_CONSOLE = "282353320781";
 
     // App API Key at Google Cloud Console (aka Google API Console)
-    public static final String APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE = "AIzaSyBK00d8tsQZnHGshfTg4MRNTbKvkZkb2Mo";
+    public static final String APP_API_KEY_AT_GOOGLE_CLOUD_CONSOLE = "AIzaSyDcZHlPLoQX5RK1NSFgMKYvXESCKggw7BE";
 
     // Switch to enable "Experts" section in menu
     public static final boolean ENABLE_EXPERTS_SECTION = false;
@@ -68,8 +68,8 @@ public class Config {
 
     public static final long[][] CONFERENCE_DAYS = new long[][] {
             // start and end of day 1
-            { ParserUtils.parseTime("2014-10-31T10:00:00.000+01:00"),
-              ParserUtils.parseTime("2014-10-31T14:14:59.999+01:00") },
+            { ParserUtils.parseTime("2014-10-31T08:30:00.000+01:00"),
+              ParserUtils.parseTime("2014-10-31T14:15:00.000+01:00") },
         };
 
     public static final TimeZone CONFERENCE_TIMEZONE = TimeZone.getTimeZone("Europe/Madrid");
@@ -104,8 +104,8 @@ public class Config {
     public static final String WIFI_PASSPHRASE = "letsdothis";
 
     // GCM config
-    public static final String GCM_SERVER_PROD_URL = "https://devfest-omsk-gcm.appspot.com";
-    public static final String GCM_SERVER_URL = "https://devfest-omsk-gcm.appspot.com";
+    public static final String GCM_SERVER_PROD_URL = "";
+    public static final String GCM_SERVER_URL = "";
 
     // the GCM sender ID is the ID of the app in Google Cloud Console
     public static final String GCM_SENDER_ID = APP_ID_NAME_AT_GOOGLE_CLOUD_CONSOLE;
