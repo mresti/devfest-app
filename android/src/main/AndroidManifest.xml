@@ -165,17 +165,7 @@
             <meta-data android:name="android.app.searchable" android:resource="@xml/searchable" />
         </activity>
 
-        <activity android:name=".ui.SessionFeedbackActivity"
-            android:label="@string/title_session_feedback"
-            android:theme="@style/Theme.IOSched.WithElevatedHeader">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="vnd.android.cursor.item/vnd.devfest-omsk-2014.session_feedback" />
-            </intent-filter>
-        </activity>
-
-        <activity android:name=".ui.WelcomeActivity" android:theme="@style/Theme.IOSched.Welcome" />
+       <activity android:name=".ui.WelcomeActivity" android:theme="@style/Theme.IOSched.Welcome" />
 
         <activity android:name=".ui.VideoLibraryActivity"
             android:theme="@style/Theme.IOSched.VideoLibrary"

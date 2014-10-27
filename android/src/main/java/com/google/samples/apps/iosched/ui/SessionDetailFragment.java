@@ -104,7 +104,6 @@ public class SessionDetailFragment extends Fragment implements
     private boolean mInitStarred;
     private boolean mDismissedWatchLivestreamCard = false;
     private boolean mHasLivestream = false;
-    private MenuItem mSocialStreamMenuItem;
     private MenuItem mShareMenuItem;
 
     private ViewGroup mRootView;
@@ -151,7 +150,6 @@ public class SessionDetailFragment extends Fragment implements
 
     private Runnable mTimeHintUpdaterRunnable = null;
 
-    private boolean mAlreadyGaveFeedback = false;
     private boolean mIsKeynote = false;
 
     // this set stores the session IDs for which the user has dismissed the
@@ -160,7 +158,6 @@ public class SessionDetailFragment extends Fragment implements
     // the app is still executing.
     private static HashSet<String> sDismissedFeedbackCard = new HashSet<String>();
 
-    private TextView mSubmitFeedbackView;
     private float mMaxHeaderElevation;
     private float mFABElevation;
 
@@ -444,22 +441,7 @@ public class SessionDetailFragment extends Fragment implements
             LOGD(TAG, "Not scheduling notification about session start, too late.");
         }
 
-        // Schedule feedback notification
-        if (UIUtils.getCurrentTime(context) < mSessionEnd) {
-            LOGD(TAG, "Scheduling notification about session feedback.");
-            scheduleIntent = new Intent(
-                    SessionAlarmService.ACTION_SCHEDULE_FEEDBACK_NOTIFICATION,
-                    null, context, SessionAlarmService.class);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_ID, mSessionId);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_START, mSessionStart);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_END, mSessionEnd);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_TITLE, mTitleString);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_ROOM, mRoomName);
-            scheduleIntent.putExtra(SessionAlarmService.EXTRA_SESSION_SPEAKERS, mSpeakers);
-            context.startService(scheduleIntent);
-        } else {
-            LOGD(TAG, "Not scheduling feedback notification, too late.");
-        }
+
     }
 
     private void updateTimeBasedUi() {
@@ -472,11 +454,6 @@ public class SessionDetailFragment extends Fragment implements
                 && currentTimeMillis <= mSessionEnd) {
             // show the "watch now" card
             showWatchNowCard();
-        } else if (!mAlreadyGaveFeedback && mInitStarred && currentTimeMillis >= (mSessionEnd -
-                Config.FEEDBACK_MILLIS_BEFORE_SESSION_END)
-                && !sDismissedFeedbackCard.contains(mSessionId)) {
-            // show the "give feedback" card
-            showGiveFeedbackCard();
         }
 
         String timeHint = "";
@@ -522,27 +499,10 @@ public class SessionDetailFragment extends Fragment implements
 
     private void onFeedbackQueryComplete(Cursor cursor) {
         // Views have not been set up yet -- continue loading the rest of data
-        if (mSubmitFeedbackView == null) {
-            LoaderManager manager = getLoaderManager();
-            manager.restartLoader(SessionsQuery._TOKEN, null, this);
-            manager.restartLoader(SpeakersQuery._TOKEN, null, this);
-            manager.restartLoader(TAG_METADATA_TOKEN, null, this);
-        }
-
-        // Is there existing feedback for this session?
-        mAlreadyGaveFeedback = cursor.getCount() > 0;
-
-        if (mAlreadyGaveFeedback) {
-            final MessageCardView giveFeedbackCardView = (MessageCardView) mRootView.findViewById(
-                    R.id.give_feedback_card);
-            if (giveFeedbackCardView != null) {
-                giveFeedbackCardView.setVisibility(View.GONE);
-            }
-            if (mSubmitFeedbackView != null) {
-                mSubmitFeedbackView.setVisibility(View.GONE);
-            }
-        }
-        LOGD(TAG, "User " + (mAlreadyGaveFeedback ? "already gave" : "has not given") + " feedback for session.");
+        LoaderManager manager = getLoaderManager();
+        manager.restartLoader(SessionsQuery._TOKEN, null, this);
+        manager.restartLoader(SpeakersQuery._TOKEN, null, this);
+        manager.restartLoader(TAG_METADATA_TOKEN, null, this);
         cursor.close();
     }
 
@@ -626,9 +586,6 @@ public class SessionDetailFragment extends Fragment implements
         }
 
         mHashTag = cursor.getString(SessionsQuery.HASHTAG);
-        if (!TextUtils.isEmpty(mHashTag)) {
-            enableSocialStreamMenuItemDeferred();
-        }
 
         mRoomId = cursor.getString(SessionsQuery.ROOM_ID);
 
@@ -794,15 +751,6 @@ public class SessionDetailFragment extends Fragment implements
                     getWatchLiveIntent(context)));
         }
 
-        // Add session feedback link, if appropriate
-        if (!mAlreadyGaveFeedback && currentTimeMillis > mSessionEnd
-                - Config.FEEDBACK_MILLIS_BEFORE_SESSION_END) {
-            links.add(new Pair<Integer, Object>(
-                    R.string.session_feedback_submitlink,
-                    getFeedbackIntent()
-            ));
-        }
-
         for (int i = 0; i < SessionsQuery.LINKS_INDICES.length; i++) {
             final String linkUrl = cursor.getString(SessionsQuery.LINKS_INDICES[i]);
             if (TextUtils.isEmpty(linkUrl)) {
@@ -828,9 +776,6 @@ public class SessionDetailFragment extends Fragment implements
                 // Create link view
                 TextView linkView = (TextView) inflater.inflate(R.layout.list_item_session_link,
                         linkContainer, false);
-                if (link.first == R.string.session_feedback_submitlink) {
-                    mSubmitFeedbackView = linkView;
-                }
                 linkView.setText(getString(link.first));
                 linkView.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -928,47 +873,6 @@ public class SessionDetailFragment extends Fragment implements
         });
     }
 
-    private void showGiveFeedbackCard() {
-        final MessageCardView messageCardView = (MessageCardView) mRootView.findViewById(
-                R.id.give_feedback_card);
-        messageCardView.show();
-        messageCardView.setListener(new MessageCardView.OnMessageCardButtonClicked() {
-            @Override
-            public void onMessageCardButtonClicked(String tag) {
-                if ("GIVE_FEEDBACK".equals(tag)) {
-                    /* [ANALYTICS:EVENT]
-                     * TRIGGER:   Click on the Send Feedback action on the Session Details page.
-                     * CATEGORY:  'Session'
-                     * ACTION:    'Feedback'
-                     * LABEL:     session title/subtitle
-                     * [/ANALYTICS]
-                     */
-                    AnalyticsManager.sendEvent("Session", "Feedback", mTitleString, 0L);
-                    Intent intent = getFeedbackIntent();
-                    startActivity(intent);
-                } else {
-                    sDismissedFeedbackCard.add(mSessionId);
-                    messageCardView.dismiss();
-                }
-            }
-        });
-    }
-
-    private Intent getFeedbackIntent() {
-        return new Intent(Intent.ACTION_VIEW, mSessionUri, getActivity(),
-                SessionFeedbackActivity.class);
-    }
-
-    private void enableSocialStreamMenuItemDeferred() {
-        mDeferredUiOperations.add(new Runnable() {
-            @Override
-            public void run() {
-                mSocialStreamMenuItem.setVisible(true);
-            }
-        });
-        tryExecuteDeferredUiOperations();
-    }
-
     private void showStarredDeferred(final boolean starred, final boolean allowAnimate) {
         mDeferredUiOperations.add(new Runnable() {
             @Override
@@ -1004,12 +908,7 @@ public class SessionDetailFragment extends Fragment implements
     }
 
     private void tryExecuteDeferredUiOperations() {
-        if (mSocialStreamMenuItem != null) {
-            for (Runnable r : mDeferredUiOperations) {
-                r.run();
-            }
-            mDeferredUiOperations.clear();
-        }
+
     }
 
     private void onSpeakersQueryComplete(Cursor cursor) {
@@ -1094,7 +993,6 @@ public class SessionDetailFragment extends Fragment implements
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.session_detail, menu);
-        mSocialStreamMenuItem = menu.findItem(R.id.menu_social_stream);
         mShareMenuItem = menu.findItem(R.id.menu_share);
         tryExecuteDeferredUiOperations();
     }
