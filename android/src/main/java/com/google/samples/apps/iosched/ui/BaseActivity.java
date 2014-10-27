@@ -673,10 +673,6 @@ public abstract class BaseActivity extends Activity implements
                 WiFiUtils.showWiFiDialog(this);
                 return true;
 
-            case R.id.menu_i_o_hunt:
-                launchIoHunt();
-                return true;
-
             case R.id.menu_debug:
                 if (BuildConfig.DEBUG) {
                     startActivity(new Intent(this, DebugActionRunnerActivity.class));
@@ -836,10 +832,6 @@ public abstract class BaseActivity extends Activity implements
             mapItem.setVisible(isRemote);
         }
 
-        MenuItem ioHuntItem = menu.findItem(R.id.menu_i_o_hunt);
-        if (ioHuntItem != null) {
-            ioHuntItem.setVisible(!isRemote && !TextUtils.isEmpty(Config.IO_HUNT_PACKAGE_NAME));
-        }
     }
 
     @Override
