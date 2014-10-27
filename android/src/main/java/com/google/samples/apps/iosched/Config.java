@@ -47,7 +47,7 @@ public class Config {
     public static final String DOGFOOD_BUILD_WARNING_TEXT = "This is a test build.";
 
     // Public data manifest URL
-    public static final String PROD_CONFERENCE_DATA_MANIFEST_URL = "https://dl.dropboxusercontent.com/u/4423440/devfest-app/manifest.json";
+    public static final String PROD_CONFERENCE_DATA_MANIFEST_URL = "https://00e4a9513962da55d2a75d9c6ac2555247d0243b.googledrive.com/host/0B6yrWd0Ff8tbdHJZVHFuTEZxOTg/appDevfest/manifest.json";
 
     // Manifest URL override for Debug (staging) builds:
     public static final String MANIFEST_URL = PROD_CONFERENCE_DATA_MANIFEST_URL;
