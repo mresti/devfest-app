@@ -16,5 +16,7 @@
 -->
 
 <resources>
-    <string name="eula_legal_text">Your EULA text here.</string>
+    <string name="eula_legal_text">El propósito de esta app para el GDG DevFest Android Granada, es proporcionar a los asistentes una app
+       para disponer del programa del GDG DevFest Android Granada. Además, tienen oportunidad de guardarse las charlas en el Google Calendar
+       y poder comentar por Google Plus del evento en los diferentes hashtags que hay disponibles.</string>
 </resources>
