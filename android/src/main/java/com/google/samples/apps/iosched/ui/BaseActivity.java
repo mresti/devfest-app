@@ -669,10 +669,6 @@ public abstract class BaseActivity extends Activity implements
                 HelpUtils.showAbout(this);
                 return true;
 
-            case R.id.menu_wifi:
-                WiFiUtils.showWiFiDialog(this);
-                return true;
-
             case R.id.menu_debug:
                 if (BuildConfig.DEBUG) {
                     startActivity(new Intent(this, DebugActionRunnerActivity.class));
@@ -810,11 +806,6 @@ public abstract class BaseActivity extends Activity implements
     }
 
     protected void configureStandardMenuItems(Menu menu) {
-        MenuItem wifiItem = menu.findItem(R.id.menu_wifi);
-        if (wifiItem != null && !WiFiUtils.shouldOfferToSetupWifi(this, false)) {
-            wifiItem.setVisible(false);
-        }
-
         MenuItem debugItem = menu.findItem(R.id.menu_debug);
         if (debugItem != null) {
             debugItem.setVisible(BuildConfig.DEBUG);

@@ -41,6 +41,12 @@
       <xliff:g id="num_sessions">%2$d</xliff:g> sesiones empiezan en <xliff:g id="remaining_time">%1$d</xliff:g> min.</item>
   </plurals>
 
+    <!-- Name of the application, shown in the application's title bar. -->
+    <string name="app_name">DevFest Granada</string>
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="partners">Patrocinadores</string>
+    <string name="people_ive_met_edit_note_title_with_name">Notas sobre <xliff:g id="name">%1$s</xliff:g></string>
+
     <!-- Shown in the 'About' window of the app. -->
     <string name="about_body">&lt;b&gt;GDG DevFest Granada 2014&lt;/b&gt;&lt;br&gt; Versión %s&lt;br&gt;&lt;br&gt; &lt;a href=http://m.google.com/utos&gt; Términos de servicio &lt;/a&gt;&lt;br&gt;&lt;br&gt; &lt;a href=http://www.google.com/policies/privacy/&gt; Política de privacidad &lt;/a&gt;</string>
 

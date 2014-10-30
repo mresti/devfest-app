@@ -876,10 +876,6 @@ public class SessionsFragment extends Fragment implements
             // show the "in person" vs "remote" card
             setupLocalOrRemoteCard(card);
             return true;
-        } else if (WiFiUtils.shouldOfferToSetupWifi(getActivity(), true)) {
-            // show wifi setup card
-            setupWifiOfferCard(card);
-            return true;
         } else if (PrefUtils.shouldOfferIOExtended(getActivity(), true)) {
             // show the I/O extended card
             setupIOExtendedCard(card);
@@ -916,37 +912,6 @@ public class SessionsFragment extends Fragment implements
                     public void run() {
                         PrefUtils.setAttendeeAtVenue(context, inPerson);
                         PrefUtils.markAnsweredLocalOrRemote(context);
-                    }
-                }, CARD_DISMISS_ACTION_DELAY);
-            }
-        });
-        card.show();
-    }
-
-    private void setupWifiOfferCard(final MessageCardView card) {
-        card.overrideBackground(R.drawable.card_bg);
-        card.setText(getString(TimeUtils.hasConferenceStarted(getActivity()) ?
-                R.string.question_setup_wifi_after_i_o_start :
-                R.string.question_setup_wifi_before_i_o_start));
-        card.setButton(0, getString(R.string.no_thanks), CARD_ANSWER_NO,
-                false, 0);
-        card.setButton(1, getString(R.string.setup_wifi_yes), CARD_ANSWER_YES,
-                true, 0);
-        final Context context = getActivity().getApplicationContext();
-        card.setListener(new MessageCardView.OnMessageCardButtonClicked() {
-            @Override
-            public void onMessageCardButtonClicked(final String tag) {
-                card.dismiss(true);
-
-                // post delayed to give card time to animate
-                mHandler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        if (CARD_ANSWER_YES.equals(tag)) {
-                            WiFiUtils.showWiFiDialog(SessionsFragment.this.getActivity());
-                        } else {
-                            PrefUtils.markDeclinedWifiSetup(context);
-                        }
                     }
                 }, CARD_DISMISS_ACTION_DELAY);
             }
