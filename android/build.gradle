@@ -14,8 +14,6 @@
  * limitations under the License.
  */
 
-lpreview = hasProperty('lpreview')
-
 apply plugin: 'com.android.application'
 
 repositories {
@@ -26,12 +24,10 @@ repositories {
 }
 
 android {
-    compileSdkVersion lpreview ? "android-L" : 19
+    compileSdkVersion 19
     buildToolsVersion "20.0.0"
 
-    productFlavors { lpreview ? lpreview{} : classic{} }
-
-    defaultConfig lpreview ? {} : {
+    defaultConfig {
         // Non-L-preview configuration
         applicationId "org.gdgomsk.devfest.app"
         minSdkVersion 14
@@ -59,7 +55,7 @@ android {
             signingConfig signingConfigs.debug
         }
         release {
-            runProguard true
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), file('proguard-project.txt')
             signingConfig signingConfigs.release
         }
